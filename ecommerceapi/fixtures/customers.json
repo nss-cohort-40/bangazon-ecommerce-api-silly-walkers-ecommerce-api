@@ -1,0 +1,11 @@
+[
+  {
+    "model": "ecommerceapi.customer",
+    "pk": 1,
+    "fields": {
+      "address": "1234 Sesame Street",
+      "user": 1,
+      "phone_number": "867-5309"
+    }
+  }
+]
