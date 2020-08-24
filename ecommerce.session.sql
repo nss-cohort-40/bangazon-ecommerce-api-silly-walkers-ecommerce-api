@@ -1,8 +1,10 @@
+
+
 -- Populating ProductType Table
 -- Luke
 
 INSERT INTO ecommerceapi_producttype
-    ([name])
+    (name)
 VALUES
     ("Animals"),
     ("Autos"),

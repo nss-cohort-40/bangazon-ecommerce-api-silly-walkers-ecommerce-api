@@ -17,7 +17,7 @@ class ProductTypeSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'url', 'name')
 
 
-class ProductType(ViewSet):
+class ProductTypes(ViewSet):
 
     def create(self, request):
         newproducttype = ProductType()

@@ -1,1 +1,1 @@
-from .product_type import ProductType
+from .product_type import ProductTypes
