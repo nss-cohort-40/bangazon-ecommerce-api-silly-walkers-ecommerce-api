@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from ecommerceapi.models import PaymentType
+from ecommerceapi.models import Customer 
 
 class PaymentTypeSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -13,8 +14,8 @@ class PaymentTypeSerializer(serializers.HyperlinkedModelSerializer):
             view_name='paymenttype',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'merchant_name', 'account_number', 'expiration_date', 'created_at')
-
+        fields = ('id', 'url', 'merchant_name', 'account_number', 'expiration_date', 'created_at', 'customer')
+        depth= 1
 
 class PaymentTypes(ViewSet):
 
