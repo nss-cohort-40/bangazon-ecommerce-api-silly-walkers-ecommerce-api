@@ -17,19 +17,8 @@ class Product(models.Model):
     product_type = models.ForeignKey(ProductType, on_delete=models.DO_NOTHING)
 
     class Meta:
-        verbose_name = ("producttype")
-        verbose_name_plural = ("producttypes")
+        verbose_name = ("product")
+        verbose_name_plural = ("products")
 
     def __str__(self):
         return self.name
-
- Id int PK
-  Title varchar(50)
-  CustomerId int
-  Price decimal
-  Description varchar(255)
-  Quantity int
-  Location varchar(75)
-  ImagePath varchar(255)
-  CreatedAt datetime
-  ProductTypeId int
