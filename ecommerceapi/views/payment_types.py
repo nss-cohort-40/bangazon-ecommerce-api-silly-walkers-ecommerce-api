@@ -43,9 +43,9 @@ class PaymentTypes(ViewSet):
     def update(self, request, pk=None):
         paymenttype = PaymentType.objects.get(pk=pk)
         paymenttype.merchant_name = request.data["merchant_name"]
-        newpaymenttype.account_number = request.data["account_number"]
-        newpaymenttype.expiration_date = request.data["expiration_date"]
-        newpaymenttype.created_at = request.data["created_at"]
+        paymenttype.account_number = request.data["account_number"]
+        paymenttype.expiration_date = request.data["expiration_date"]
+        paymenttype.created_at = request.data["created_at"]
         paymenttype.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
