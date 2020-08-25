@@ -20,9 +20,14 @@ from rest_framework.authtoken.views import obtain_auth_token
 from ecommerceapi.models import ProductType
 from ecommerceapi.views import ProductTypes
 from ecommerceapi.views import register_user, login_user
+from ecommerceapi.models import Customer
+from ecommerceapi.views import Customers
+from ecommerceapi.views import UserViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'producttypes', ProductTypes, 'producttype')
+router.register(r'customers', Customers, 'customer')
+router.register(r'users', UserViewSet, 'user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
