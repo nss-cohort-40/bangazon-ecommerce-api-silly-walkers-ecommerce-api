@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .
+from 
 from .product_type import ProductType
 
 class Product(models.Model):
