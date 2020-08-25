@@ -33,13 +33,12 @@ class Customers(ViewSet):
             return HttpResponseServerError(ex)
 
     def update(self, request, pk=None):
-        newcustomer = Customer.objects.get(pk=pk)
-        newcustomer.address = request.data["address"]
-        newcustomer.phone_number = request.data["phone_number"]
-        newcustomer.user.first_name = request.data["first_name"]
-        newcustomer.user.last_name = request.data["last_name"]
-        newcustomer.user.email = request.data["email"]
-        newcustomer.save()
+        customer = Customer.objects.get(pk=pk)
+        # user = User.objects.get(pk=pk)
+        customer.address = request.data["address"]
+        customer.phone_number = request.data["phone_number"]
+        # user.last_name = request.data["last_name"]
+        customer.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
