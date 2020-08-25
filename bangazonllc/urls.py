@@ -17,11 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
+from ecommerceapi.models import Customer
 from ecommerceapi.models import ProductType
+from ecommerceapi.views import Customers
 from ecommerceapi.views import ProductTypes
 from ecommerceapi.views import register_user, login_user
-from ecommerceapi.models import Customer
-from ecommerceapi.views import Customers
 from ecommerceapi.views import UserViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
