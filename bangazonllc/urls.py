@@ -19,9 +19,12 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 from ecommerceapi.models import ProductType
 from ecommerceapi.views import ProductTypes
+from ecommerceapi.models import PaymentType
+from ecommerceapi.views import PaymentTypes
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'producttypes', ProductTypes, 'producttype')
+router.register(r'paymenttypes', PaymentTypes, 'paymenttype')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
