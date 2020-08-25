@@ -1,4 +1,4 @@
-
+DELETE FROM auth_user;
 
 -- Populating ProductType Table
 -- Luke
