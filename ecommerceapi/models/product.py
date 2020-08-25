@@ -1,14 +1,14 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from 
+from .customer import Customer
 from .product_type import ProductType
 
 class Product(models.Model):
 
-    name = models.CharField(max_length=55)
+    title = models.CharField(max_length=55)
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
-    price = models.DecimalField
+    price = models.DecimalField()
     description = models.CharField(max_length=255)
     quantity = models.IntegerField()
     location = models.CharField(max_length=75)
