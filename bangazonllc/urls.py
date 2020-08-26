@@ -23,11 +23,14 @@ from ecommerceapi.views import Customers
 from ecommerceapi.views import ProductTypes
 from ecommerceapi.views import register_user, login_user
 from ecommerceapi.views import UserViewSet
+from ecommerceapi.models import PaymentType
+from ecommerceapi.views import PaymentTypes
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'producttypes', ProductTypes, 'producttype')
 router.register(r'customers', Customers, 'customer')
 router.register(r'users', UserViewSet, 'user')
+router.register(r'paymenttypes', PaymentTypes, 'paymenttype')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

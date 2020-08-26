@@ -1,6 +1,6 @@
 [
   {
-    "model": "ecommerceapi.payment_types",
+    "model": "ecommerceapi.paymenttype",
     "pk": 1,
     "fields": {
       "merchant_name": "Weasleys' Wizard Wheezes",
