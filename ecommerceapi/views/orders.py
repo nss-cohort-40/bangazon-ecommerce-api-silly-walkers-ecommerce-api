@@ -6,8 +6,19 @@ from ecommerceapi.models import *
 from .customers import CustomersSerializer
 
 
+class CustomerIDSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Customer
+        url = serializers.HyperlinkedIdentityField(
+            view_name='customers',
+            lookup_field='id'
+        )
+        fields = ('id',)
+        depth = 1
+
+
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
-    customer = CustomersSerializer()
+    customer = CustomerIDSerializer()
 
     class Meta:
         model = Order
@@ -15,9 +26,10 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
             view_name='order',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'customer')
+        fields = ('id', 'payment_type', 'url',
+                  'customer')
 
-        depth = 1
+        depth = 5
 
 
 class Orders(ViewSet):
