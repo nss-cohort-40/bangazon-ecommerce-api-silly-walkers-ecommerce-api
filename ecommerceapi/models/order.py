@@ -8,5 +8,5 @@ from .customer import Customer
 class Order(SafeDeleteModel):
     _safedelete_policy = SOFT_DELETE
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
-    payment_type = models.ForeignKey(PaymentType, on_delete=models.DO_NOTHING)
+    # payment_type = models.ForeignKey(PaymentType, on_delete=models.DO_NOTHING)
     create_date = models.DateTimeField()
