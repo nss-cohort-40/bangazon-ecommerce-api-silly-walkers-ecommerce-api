@@ -23,23 +23,17 @@ from ecommerceapi.views import Customers
 from ecommerceapi.views import ProductTypes
 from ecommerceapi.views import register_user, login_user
 from ecommerceapi.views import UserViewSet
-<<<<<<< HEAD
 from ecommerceapi.views import Orders
 from ecommerceapi.models import Order
-=======
 from ecommerceapi.models import PaymentType
 from ecommerceapi.views import PaymentTypes
->>>>>>> master
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'producttypes', ProductTypes, 'producttype')
 router.register(r'customers', Customers, 'customer')
 router.register(r'users', UserViewSet, 'user')
-<<<<<<< HEAD
 router.register(r'orders', Orders, 'order')
-=======
 router.register(r'paymenttypes', PaymentTypes, 'paymenttype')
->>>>>>> master
 
 urlpatterns = [
     path('admin/', admin.site.urls),
