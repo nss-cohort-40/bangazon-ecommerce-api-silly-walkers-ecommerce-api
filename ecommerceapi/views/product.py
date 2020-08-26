@@ -16,7 +16,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             view_name='product',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'merchant_name', 'account_number', 'expiration_date', 'created_at', 'customer', 'product_type_Id')
+        fields = ('id', 'url', 'title', 'account_number', 'quantity', 'description' 'created_at', 'customer', 'product_type_Id', 'imagePath')
         depth= 1
 
 
@@ -24,8 +24,14 @@ class Products(ViewSet):
 
     def create(self, request):
         new_product = Product()
-        new_product.name = request.data["name"]
+        new_product.title = request.data["title"]
+        new_product.description = request.data["description"]
+        new_product.quantity = request.data["quantity"]
+        new_product.account_number = request.data["account_number"]
+        new_product.customer = request.data["customer"]
         location = Product.objects.get(pk=request.data["product_id"])
+        imagePath = Product.objects.get(pk=request.data["imagePath"])
+        new_product.created_at = request.data["created_at"]
         product.location = location
         new_product.save()
 
@@ -44,7 +50,8 @@ class Products(ViewSet):
     def update(self, request, pk=None):
         product = Product.objects.get(pk=pk)
         location = ProductLocation.objects.get(pk=request.data["location_id"])
-        product.name = request.data["name"]
+        product.title = request.data["title"]
+        product.created_at = request.data["created_at"]
         product.location = location
         product.save()
 
