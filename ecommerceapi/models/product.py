@@ -8,7 +8,7 @@ class Product(models.Model):
 
     title = models.CharField(max_length=55)
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
-    price = models.DecimalField()
+    price = models.DecimalField(decimal_places=2, max_digits=7)
     description = models.CharField(max_length=255)
     quantity = models.IntegerField()
     location = models.CharField(max_length=75)
