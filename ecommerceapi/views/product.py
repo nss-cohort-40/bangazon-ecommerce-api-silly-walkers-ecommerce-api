@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from ecommerceapi.models import Product
+from ecommerceapi.models import ProductType
+from ecommerceapi.models import Customer 
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
@@ -14,7 +16,8 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             view_name='product',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'name', 'location')
+        fields = ('id', 'url', 'merchant_name', 'account_number', 'expiration_date', 'created_at', 'customer', 'product_type_Id')
+        depth= 1
 
 
 class Products(ViewSet):
@@ -39,50 +42,33 @@ class Products(ViewSet):
             return HttpResponseServerError(ex)
 
     def update(self, request, pk=None):
-        """Handle PUT requests for a park area attraction
-
-        Returns:
-            Response -- Empty body with 204 status code
-        """
-        attraction = Attraction.objects.get(pk=pk)
-        area = ParkArea.objects.get(pk=request.data["area_id"])
-        attraction.name = request.data["name"]
-        attraction.area = area
-        attraction.save()
+        product = Product.objects.get(pk=pk)
+        location = ProductLocation.objects.get(pk=request.data["location_id"])
+        product.name = request.data["name"]
+        product.location = location
+        product.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def destroy(self, request, pk=None):
-        """Handle DELETE requests for a single park are
-
-        Returns:
-            Response -- 200, 404, or 500 status code
-        """
         try:
-            area = Attraction.objects.get(pk=pk)
-            area.delete()
+            product = Product.objects.get(pk=pk)
+            location.delete()
+            product.delete()
 
             return Response({}, status=status.HTTP_204_NO_CONTENT)
 
-        except Attraction.DoesNotExist as ex:
+        except Product.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
         except Exception as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def list(self, request):
-        """Handle GET requests to park attractions resource
-
-        Returns:
-            Response -- JSON serialized list of park attractions
-        """
-        attractions = Attraction.objects.all()
-
-        # Support filtering attractions by area id
-        area = self.request.query_params.get('area', None)
-        if area is not None:
-            attractions = attractions.filter(area__id=area)
-
-        serializer = AttractionSerializer(
-            attractions, many=True, context={'request': request})
+        products = Product.objects.all()
+        location = self.request.query_params.get('location', None)
+        if location is not None:
+            products = products.filter(location__id=location)
+        serializer = ProductSerializer(
+            products, many=True, context={'request': request})
         return Response(serializer.data)

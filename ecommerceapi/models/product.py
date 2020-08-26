@@ -13,7 +13,7 @@ class Product(models.Model):
     quantity = models.IntegerField()
     location = models.CharField(max_length=75)
     imagePath = models.CharField(max_length=255)
-    createdAt = models.DateTimeField()
+    createdAt = models.DateTimeField(auto_now_add=True)
     product_type = models.ForeignKey(ProductType, on_delete=models.DO_NOTHING)
 
     class Meta:
@@ -21,4 +21,4 @@ class Product(models.Model):
         verbose_name_plural = ("products")
 
     def __str__(self):
-        return self.name
+        return self.title
