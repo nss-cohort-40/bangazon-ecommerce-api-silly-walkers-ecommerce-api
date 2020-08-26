@@ -3,9 +3,11 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from ecommerceapi.models import *
+from .customers import CustomersSerializer
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
+    customer = CustomersSerializer()
 
     class Meta:
         model = Order
@@ -26,10 +28,10 @@ class Orders(ViewSet):
         new_order.create_date = request.data["create_date"]
 
         customer = Customer.objects.get(pk=request.data["customer_id"])
-        # payment_type = PaymentType.objects.get(
-        #     pk=request.data["payment_type_id"])
+        payment_type = PaymentType.objects.get(
+            pk=request.data["payment_type_id"])
         new_order.customer = customer
-        # new_order.payment_type = payment_type
+        new_order.payment_type = payment_type
         new_order.save()
 
     def retrieve(self, request, pk=None):
@@ -44,6 +46,7 @@ class Orders(ViewSet):
         orders = Order.objects.all()
         # Filtering for orders by customer id
         customer = self.request.query_params.get('customer', None)
+        print("Customer:", customer)
         if customer is not None:
             orders = orders.filter(customer__id=customer)
 
