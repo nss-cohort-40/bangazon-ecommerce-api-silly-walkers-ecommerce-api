@@ -9,9 +9,9 @@
       "description": "Make magic happen",
       "quantity": 1,
       "location": "Hogwarts",
-      "image_path": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fharrypotter.fandom.com%2Fwiki%2FElder_Wand&psig=AOvVaw0P78I_32YN6siKJmHSqi6t&ust=1598382576591000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKC4tp_FtOsCFQAAAAAdAAAAABAI",
-      "created_at": "2020-08-24",
-      "product_type_id": 15
+      "imagePath": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fharrypotter.fandom.com%2Fwiki%2FElder_Wand&psig=AOvVaw0P78I_32YN6siKJmHSqi6t&ust=1598382576591000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKC4tp_FtOsCFQAAAAAdAAAAABAI",
+      "createdAt": "2020-08-24",
+      "product_type_id": 1
     }
   }
 ]
