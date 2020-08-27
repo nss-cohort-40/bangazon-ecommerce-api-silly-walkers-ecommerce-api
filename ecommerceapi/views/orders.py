@@ -13,7 +13,7 @@ class CustomerIDSerializer(serializers.HyperlinkedModelSerializer):
             view_name='customers',
             lookup_field='id'
         )
-        fields = ('id', 'product')
+        fields = ('id',)
         depth = 2
 
 
@@ -26,8 +26,7 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
             view_name='order',
             lookup_field='id'
         )
-        fields = ('id', 'payment_type', 'url',
-                  'customer')
+        fields = ('id', 'payment_type', 'url', 'customer')
 
         depth = 5
 
@@ -58,7 +57,6 @@ class Orders(ViewSet):
         orders = Order.objects.all()
         # Filtering for orders by customer id
         customer = self.request.query_params.get('customer', None)
-        print("Customer:", customer)
         if customer is not None:
             orders = orders.filter(customer__id=customer)
 
