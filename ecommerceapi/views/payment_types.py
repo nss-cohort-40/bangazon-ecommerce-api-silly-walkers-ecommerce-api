@@ -24,10 +24,12 @@ class PaymentTypes(ViewSet):
 
     def create(self, request):
         newpaymenttype = PaymentType()
+        customer = Customer.objects.get(user=request.auth.user)
         newpaymenttype.merchant_name = request.data["merchant_name"]
         newpaymenttype.account_number = request.data["account_number"]
         newpaymenttype.expiration_date = request.data["expiration_date"]
         newpaymenttype.created_at = request.data["created_at"]
+        newpaymenttype.customer = customer
         newpaymenttype.save()
 
         serializer = PaymentTypeSerializer(
