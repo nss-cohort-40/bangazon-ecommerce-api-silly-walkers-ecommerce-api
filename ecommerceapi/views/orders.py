@@ -13,8 +13,8 @@ class CustomerIDSerializer(serializers.HyperlinkedModelSerializer):
             view_name='customers',
             lookup_field='id'
         )
-        fields = ('id',)
-        depth = 1
+        fields = ('id', 'product')
+        depth = 2
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):

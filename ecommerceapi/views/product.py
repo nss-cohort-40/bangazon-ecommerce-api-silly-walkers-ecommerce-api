@@ -4,10 +4,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from ecommerceapi.models import Product
-from ecommerceapi.models import ProductType
-from ecommerceapi.models import Customer
-from ecommerceapi.models import Order
+from ecommerceapi.models import *
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
@@ -20,7 +17,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         )
         fields = ('id', 'url', 'title', 'quantity', 'price', 'description',
                   'customer', 'imagePath', 'location', 'product_type')
-        depth = 1
+        depth = 2
 
 
 class Products(ViewSet):
