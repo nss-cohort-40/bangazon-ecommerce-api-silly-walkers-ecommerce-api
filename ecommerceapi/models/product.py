@@ -1,8 +1,9 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from .customer import Customer
 from .product_type import ProductType
+from .customer import Customer
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 
 class Product(models.Model):
 
