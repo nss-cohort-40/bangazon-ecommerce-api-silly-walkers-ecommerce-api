@@ -25,7 +25,7 @@ class Products(ViewSet):
     def create(self, request):
         new_product = Product()
         product_type = ProductType.objects.get(
-            pk=request.data["producttype_id"])
+            pk=request.data["product_type_id"])
         customer = Customer.objects.get(user=request.auth.user)
 
         new_product.title = request.data["title"]
