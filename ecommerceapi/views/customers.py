@@ -34,11 +34,13 @@ class Customers(ViewSet):
 
     def update(self, request, pk=None):
         customer = Customer.objects.get(pk=pk)
-        # user = User.objects.get(pk=pk)
+        user = User.objects.get(customer=pk)
         customer.address = request.data["address"]
         customer.phone_number = request.data["phone_number"]
-        # user.last_name = request.data["last_name"]
+        user.first_name = request.data["first_name"]
+        user.last_name = request.data["last_name"]
         customer.save()
+        user.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
