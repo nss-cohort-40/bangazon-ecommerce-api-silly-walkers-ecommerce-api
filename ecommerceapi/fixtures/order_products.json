@@ -1,0 +1,34 @@
+[
+  {
+    "model": "ecommerceapi.orderproduct",
+    "pk": 1,
+    "fields": {
+      "order_id": 1,
+      "product_id": 1
+    }
+  },
+  {
+    "model": "ecommerceapi.orderproduct",
+    "pk": 2,
+    "fields": {
+      "order_id": 1,
+      "product_id": 2
+    }
+  },
+  {
+    "model": "ecommerceapi.orderproduct",
+    "pk": 3,
+    "fields": {
+      "order_id": 2,
+      "product_id": 2
+    }
+  },
+  {
+    "model": "ecommerceapi.orderproduct",
+    "pk": 4,
+    "fields": {
+      "order_id": 2,
+      "product_id": 1
+    }
+  }
+]
