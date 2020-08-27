@@ -33,6 +33,13 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
 
 class Orders(ViewSet):
 
+    def destroy(self, request, pk=None):
+        try:
+            open_order = Order.objects.get(pk=pk)
+            open_order.delete()
+
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
     def create(self, request):
 
         new_order = Order()
