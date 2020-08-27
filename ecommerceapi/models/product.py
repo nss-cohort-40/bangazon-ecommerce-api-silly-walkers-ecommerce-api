@@ -1,8 +1,15 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from .customer import Customer
 from .product_type import ProductType
+from .customer import Customer
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+INSERT INTO ecommerceapi_orderproduct(id, order_id, product_id)
+VALUES(
+    id: integer,
+    order_id: integer,
+    product_id: integer
+)
+
 
 class Product(models.Model):
 
