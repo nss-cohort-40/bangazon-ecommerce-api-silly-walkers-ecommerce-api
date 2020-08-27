@@ -11,7 +11,7 @@
       "location": "Hogwarts",
       "imagePath": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fharrypotter.fandom.com%2Fwiki%2FElder_Wand&psig=AOvVaw0P78I_32YN6siKJmHSqi6t&ust=1598382576591000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKC4tp_FtOsCFQAAAAAdAAAAABAI",
       "createdAt": "2020-08-24",
-      "product_type_id": 15
+      "product_type_id": 5
     }
   },
   {
@@ -26,7 +26,22 @@
       "location": "Hogwarts",
       "imagePath": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fharrypotter.fandom.com%2Fwiki%2FElder_Wand&psig=AOvVaw0P78I_32YN6siKJmHSqi6t&ust=1598382576591000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKC4tp_FtOsCFQAAAAAdAAAAABAI",
       "createdAt": "2020-08-24",
-      "product_type_id": 15
+      "product_type_id": 5
+    }
+  },
+  {
+    "model": "ecommerceapi.product",
+    "pk": 3,
+    "fields": {
+      "title": "Honda Element",
+      "customer_id": 1,
+      "price": 1500.99,
+      "description": "Take me out of my Element",
+      "quantity": 1,
+      "location": "Hogwarts",
+      "imagePath": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fharrypotter.fandom.com%2Fwiki%2FElder_Wand&psig=AOvVaw0P78I_32YN6siKJmHSqi6t&ust=1598382576591000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKC4tp_FtOsCFQAAAAAdAAAAABAI",
+      "createdAt": "2020-08-24",
+      "product_type_id": 2
     }
   }
 ]
