@@ -40,6 +40,16 @@ class Orders(ViewSet):
 
             return Response({}, status=status.HTTP_204_NO_CONTENT)
 
+        except Order.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+    def update(self, request, pk=None):
+        order = Order.objects.get(pk=pk)
+        order.payment_type_id = request.data["payment_type_id"]
+        order.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
     def create(self, request):
 
         new_order = Order()
