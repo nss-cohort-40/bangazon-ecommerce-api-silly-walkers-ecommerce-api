@@ -8,6 +8,8 @@ from ecommerceapi.views import Customers
 from ecommerceapi.views import ProductTypes
 from ecommerceapi.views import register_user, login_user
 from ecommerceapi.views import UserViewSet
+from ecommerceapi.views import Orders
+from ecommerceapi.models import Order
 from ecommerceapi.models import Product
 from ecommerceapi.views import Products
 from ecommerceapi.models import PaymentType
@@ -17,6 +19,7 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'producttypes', ProductTypes, 'producttype')
 router.register(r'customers', Customers, 'customer')
 router.register(r'users', UserViewSet, 'user')
+router.register(r'orders', Orders, 'order')
 router.register(r'products', Products, 'product')
 router.register(r'paymenttypes', PaymentTypes, 'paymenttype')
 
