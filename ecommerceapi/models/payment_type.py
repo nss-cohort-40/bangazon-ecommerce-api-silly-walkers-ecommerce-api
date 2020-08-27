@@ -1,7 +1,10 @@
 from django.db import models
+from safedelete.models import SafeDeleteModel
+from safedelete.models import SOFT_DELETE
 from .customer import Customer
 
-class PaymentType(models.Model):
+class PaymentType(SafeDeleteModel):
+    _safedelete_policy = SOFT_DELETE
     merchant_name = models.CharField(max_length=50)
     account_number = models.CharField(max_length=50)
     expiration_date = models.DateField(auto_now=False)
