@@ -53,14 +53,19 @@ class Orders(ViewSet):
     def create(self, request):
 
         new_order = Order()
-        new_order.create_date = request.data["create_date"]
+        new_order.created_at = request.data["created_at"]
 
         customer = Customer.objects.get(pk=request.data["customer_id"])
-        payment_type = PaymentType.objects.get(
-            pk=request.data["payment_type_id"])
+        # payment_type = PaymentType.objects.get(
+        #     pk=request.data["payment_type_id"])
         new_order.customer = customer
-        new_order.payment_type = payment_type
+        new_order.payment_type = None
         new_order.save()
+
+        serializer = OrderSerializer(
+            new_order, context={'request': request}
+        )
+        return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         try:
