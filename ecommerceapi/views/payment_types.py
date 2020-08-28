@@ -28,7 +28,6 @@ class PaymentTypes(ViewSet):
         newpaymenttype.merchant_name = request.data["merchant_name"]
         newpaymenttype.account_number = request.data["account_number"]
         newpaymenttype.expiration_date = request.data["expiration_date"]
-        newpaymenttype.created_at = request.data["created_at"]
         newpaymenttype.customer = customer
         newpaymenttype.save()
 
@@ -70,7 +69,8 @@ class PaymentTypes(ViewSet):
             return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def list(self, request):
-        paymenttype = PaymentType.objects.all()
+        customer = Customer.objects.get(user=request.user.id)
+        paymenttypes = PaymentType.objects.filter(customer=customer)
         serializer = PaymentTypeSerializer(
-            paymenttype, many=True, context={'request': request})
+            paymenttypes, many=True, context={'request': request})
         return Response(serializer.data)

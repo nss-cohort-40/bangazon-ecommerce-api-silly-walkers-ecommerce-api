@@ -51,9 +51,8 @@ class Orders(ViewSet):
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def create(self, request):
-
+        current_order = Order.objects.get(user=request.user, payment_type=None)
         new_order = Order()
-        new_order.created_at = request.data["created_at"]
 
         customer = Customer.objects.get(pk=request.data["customer_id"])
         # payment_type = PaymentType.objects.get(
