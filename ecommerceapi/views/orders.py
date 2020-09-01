@@ -33,17 +33,38 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
 
 class Orders(ViewSet):
 
-    def create(self, request):
+    def destroy(self, request, pk=None):
+        try:
+            open_order = Order.objects.get(pk=pk)
+            open_order.delete()
 
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        except Order.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+    def update(self, request, pk=None):
+        order = Order.objects.get(pk=pk)
+        order.payment_type_id = request.data["payment_type_id"]
+        order.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+    def create(self, request):
+        current_order = Order.objects.get(user=request.user, payment_type=None)
         new_order = Order()
-        new_order.create_date = request.data["create_date"]
 
         customer = Customer.objects.get(pk=request.data["customer_id"])
-        payment_type = PaymentType.objects.get(
-            pk=request.data["payment_type_id"])
+        # payment_type = PaymentType.objects.get(
+        #     pk=request.data["payment_type_id"])
         new_order.customer = customer
-        new_order.payment_type = payment_type
+        new_order.payment_type = None
         new_order.save()
+
+        serializer = OrderSerializer(
+            new_order, context={'request': request}
+        )
+        return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         try:
