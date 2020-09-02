@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from ecommerceapi.models import *
 from .customers import CustomersSerializer
+from .product import ProductSerializer
 
 
 class CustomerIDSerializer(serializers.HyperlinkedModelSerializer):
@@ -28,7 +29,7 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
         )
         fields = ('id', 'payment_type', 'url', 'customer')
 
-        depth = 5
+        depth = 2
 
 
 class Orders(ViewSet):
@@ -51,20 +52,46 @@ class Orders(ViewSet):
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def create(self, request):
-        current_order = Order.objects.get(user=request.user, payment_type=None)
-        new_order = Order()
+        print("REQUEST", request.user.id)
+        # Checking for open order here
+        customer = Customer.objects.get(user=request.user.id)
+        current_order = Order.objects.get(
+            customer=customer, payment_type=None)
+        print("CURRENT ORDER:", current_order)
+        if current_order.id != 0:
+            print("CURRENT ORDER IS TRUE")
+            order_product = OrderProduct()
+            # product = Product.objects.get(pk=request.data["product_id"])
+            order_product.product_id = request.data["product_id"]
+            order_product.order = current_order
+            order_product.save()
+            products_on_order = Product.objects.filter(
+                cart__order=current_order)
 
-        customer = Customer.objects.get(pk=request.data["customer_id"])
-        # payment_type = PaymentType.objects.get(
-        #     pk=request.data["payment_type_id"])
-        new_order.customer = customer
-        new_order.payment_type = None
-        new_order.save()
+            serializer = ProductSerializer(
+                products_on_order, many=True, context={'request': request}
+            )
 
-        serializer = OrderSerializer(
-            new_order, context={'request': request}
-        )
-        return Response(serializer.data)
+            return Response(serializer.data)
+        else:
+            new_order = Order()
+            new_order.customer = customer
+            new_order.payment_type = None
+            new_order.save()
+
+            new_order_product = OrderProduct()
+
+            product = Product.objects.get(pk=request.data["product_id"])
+            # payment_type = PaymentType.objects.get(
+            #     pk=request.data["payment_type_id"])
+            new_order_product.product = product
+            new_order_product.order = new_order
+            new_order_product.save()
+
+            serializer = OrderSerializer(
+                new_order, context={'request': request}
+            )
+            return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         try:

@@ -1,4 +1,5 @@
-DELETE FROM auth_user;
+DELETE FROM ecommerceapi_orderproduct
+WHERE id = 7;
 
 -- Populating ProductType Table
 -- Luke
