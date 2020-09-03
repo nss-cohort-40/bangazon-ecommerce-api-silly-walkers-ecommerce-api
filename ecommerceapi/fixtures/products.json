@@ -9,7 +9,7 @@
       "description": "Make magic happen",
       "quantity": 1,
       "location": "Hogwarts",
-      "imagePath": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fharrypotter.fandom.com%2Fwiki%2FElder_Wand&psig=AOvVaw0P78I_32YN6siKJmHSqi6t&ust=1598382576591000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKC4tp_FtOsCFQAAAAAdAAAAABAI",
+      "imagePath": "https://i.pinimg.com/originals/f0/92/e3/f092e37c9c6ae89127ef5ec43234b1d0.jpg",
       "createdAt": "2020-08-24",
       "product_type_id": 5
     }
@@ -23,8 +23,8 @@
       "price": 15.99,
       "description": "Make taoster happen",
       "quantity": 1,
-      "location": "Hogwarts",
-      "imagePath": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fharrypotter.fandom.com%2Fwiki%2FElder_Wand&psig=AOvVaw0P78I_32YN6siKJmHSqi6t&ust=1598382576591000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKC4tp_FtOsCFQAAAAAdAAAAABAI",
+      "location": "Little Whinging",
+      "imagePath": "https://cdn.drawception.com/images/panels/2018/3-14/RTrZtWemd9-10.png",
       "createdAt": "2020-08-24",
       "product_type_id": 5
     }
@@ -38,8 +38,68 @@
       "price": 1500.99,
       "description": "Take me out of my Element",
       "quantity": 1,
-      "location": "Hogwarts",
-      "imagePath": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fharrypotter.fandom.com%2Fwiki%2FElder_Wand&psig=AOvVaw0P78I_32YN6siKJmHSqi6t&ust=1598382576591000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKC4tp_FtOsCFQAAAAAdAAAAABAI",
+      "location": "Surrey",
+      "imagePath": "https://cnet4.cbsistatic.com/img/jPUSIdHx2Drzoo3YaOcfxa8i4hY=/2020/04/14/fcfc7b47-79e9-47de-a817-9a1aa6dd8286/element-ogi.jpg",
+      "createdAt": "2020-08-24",
+      "product_type_id": 2
+    }
+  },
+  {
+    "model": "ecommerceapi.product",
+    "pk": 4,
+    "fields": {
+      "title": "First-Edition Collection of HP Books 1-7, Signed",
+      "customer_id": 1,
+      "price": 9999.99,
+      "description": "Only read once",
+      "quantity": 1,
+      "location": "Library of Congress",
+      "imagePath": "https://embed.cdn.pais.scholastic.com/v1/channels/sso/products/identifiers/isbn/9780545044257/primary/renditions/700?useMissingImage=true",
+      "createdAt": "2020-08-24",
+      "product_type_id": 2
+    }
+  },
+  {
+    "model": "ecommerceapi.product",
+    "pk": 5,
+    "fields": {
+      "title": "Broken Riding Lawnmower",
+      "customer_id": 1,
+      "price": 1,
+      "description": "Approximately 5,000 hours on the mower. Non-running, needs work",
+      "quantity": 1,
+      "location": "McMinnville",
+      "imagePath": "https://image.shutterstock.com/image-photo/image-grandfather-grandson-sunset-checking-260nw-200649362.jpg",
+      "createdAt": "2020-08-24",
+      "product_type_id": 2
+    }
+  },
+  {
+    "model": "ecommerceapi.product",
+    "pk": 6,
+    "fields": {
+      "title": "Rusty Knives",
+      "customer_id": 1,
+      "price": 750.0,
+      "description": "VINTAGE. RARE. COLLECTIBLE. POSSIBLY USED FOR AMPUTATIONS DURING THE CIVIL WAR!!!",
+      "quantity": 1,
+      "location": "Martha's Fine Antiques",
+      "imagePath": "https://static.wixstatic.com/media/0c50f4_14ec601c48184fe5b2269c91a9f27f15~mv2.jpg",
+      "createdAt": "2020-08-24",
+      "product_type_id": 2
+    }
+  },
+  {
+    "model": "ecommerceapi.product",
+    "pk": 7,
+    "fields": {
+      "title": "iPhone Lightning Cable",
+      "customer_id": 1,
+      "price": 12.37,
+      "description": "Cat chewed on it, still in working condition.",
+      "quantity": 1,
+      "location": "East Nasty",
+      "imagePath": "https://pbs.twimg.com/media/Dohdob8UwAYOwb8.jpg",
       "createdAt": "2020-08-24",
       "product_type_id": 2
     }
