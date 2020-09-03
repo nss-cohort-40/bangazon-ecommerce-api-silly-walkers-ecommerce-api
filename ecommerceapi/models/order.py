@@ -10,4 +10,4 @@ class Order(SafeDeleteModel):
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
     payment_type = models.ForeignKey(
         PaymentType, on_delete=models.SET_NULL, null=True)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)

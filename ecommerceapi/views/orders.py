@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from ecommerceapi.models import *
 from .customers import CustomersSerializer
+from .product import ProductSerializer
 
 
 class CustomerIDSerializer(serializers.HyperlinkedModelSerializer):
@@ -28,7 +29,7 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
         )
         fields = ('id', 'payment_type', 'url', 'customer')
 
-        depth = 5
+        depth = 2
 
 
 class Orders(ViewSet):
@@ -51,20 +52,41 @@ class Orders(ViewSet):
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def create(self, request):
-        current_order = Order.objects.get(user=request.user, payment_type=None)
-        new_order = Order()
+        # Checking for open order here
+        customer = Customer.objects.get(user=request.user.id)
+        current_order = Order.objects.filter(
+            customer=customer, payment_type=None)
+        if len(current_order) == 0:
+            new_order = Order()
+            new_order.customer = customer
+            new_order.payment_type = None
+            new_order.save()
 
-        customer = Customer.objects.get(pk=request.data["customer_id"])
-        # payment_type = PaymentType.objects.get(
-        #     pk=request.data["payment_type_id"])
-        new_order.customer = customer
-        new_order.payment_type = None
-        new_order.save()
+            new_order_product = OrderProduct()
 
-        serializer = OrderSerializer(
-            new_order, context={'request': request}
-        )
-        return Response(serializer.data)
+            product = Product.objects.get(pk=request.data["product_id"])
+            new_order_product.product = product
+            new_order_product.order = new_order
+            new_order_product.save()
+
+            serializer = OrderSerializer(
+                new_order, context={'request': request}
+            )
+            return Response(serializer.data)
+
+        elif current_order[0].id != 0:
+            order_product = OrderProduct()
+            order_product.product_id = request.data["product_id"]
+            order_product.order = current_order[0]
+            order_product.save()
+            products_on_order = Product.objects.filter(
+                cart__order=current_order[0])
+
+            serializer = ProductSerializer(
+                products_on_order, many=True, context={'request': request}
+            )
+
+            return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         try:
