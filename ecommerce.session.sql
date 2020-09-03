@@ -1,5 +1,5 @@
 DELETE FROM ecommerceapi_orderproduct
-WHERE id = 7;
+WHERE id = 19;
 
 -- Populating ProductType Table
 -- Luke

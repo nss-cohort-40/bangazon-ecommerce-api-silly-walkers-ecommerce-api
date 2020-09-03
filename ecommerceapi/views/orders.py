@@ -52,28 +52,14 @@ class Orders(ViewSet):
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def create(self, request):
-        print("REQUEST", request.user.id)
         # Checking for open order here
         customer = Customer.objects.get(user=request.user.id)
-        current_order = Order.objects.get(
+        current_order = Order.objects.filter(
             customer=customer, payment_type=None)
-        print("CURRENT ORDER:", current_order)
-        if current_order.id != 0:
-            print("CURRENT ORDER IS TRUE")
-            order_product = OrderProduct()
-            # product = Product.objects.get(pk=request.data["product_id"])
-            order_product.product_id = request.data["product_id"]
-            order_product.order = current_order
-            order_product.save()
-            products_on_order = Product.objects.filter(
-                cart__order=current_order)
-
-            serializer = ProductSerializer(
-                products_on_order, many=True, context={'request': request}
-            )
-
-            return Response(serializer.data)
-        else:
+        # print("Current Order:", current_order[0].id)
+        print("q******", current_order.values_list)
+        if len(current_order) == 0:
+            print("Current Order:", current_order)
             new_order = Order()
             new_order.customer = customer
             new_order.payment_type = None
@@ -91,6 +77,21 @@ class Orders(ViewSet):
             serializer = OrderSerializer(
                 new_order, context={'request': request}
             )
+            return Response(serializer.data)
+
+        elif current_order[0].id != 0:
+            order_product = OrderProduct()
+            # product = Product.objects.get(pk=request.data["product_id"])
+            order_product.product_id = request.data["product_id"]
+            order_product.order = current_order[0]
+            order_product.save()
+            products_on_order = Product.objects.filter(
+                cart__order=current_order[0])
+
+            serializer = ProductSerializer(
+                products_on_order, many=True, context={'request': request}
+            )
+
             return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
