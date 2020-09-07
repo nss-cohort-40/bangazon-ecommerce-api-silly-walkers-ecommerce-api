@@ -10,6 +10,7 @@ from ecommerceapi.models import *
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
+
         model = Product
         url = serializers.HyperlinkedIdentityField(
             view_name='product',
@@ -79,10 +80,15 @@ class Products(ViewSet):
         try:
             open_order = Order.objects.get(
                 customer=current_user, payment_type=None)
-            products_on_order = Product.objects.filter(cart__order=open_order)
+            products_on_order = Product.objects.filter(
+                cart__order=open_order)
+
         except Order.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = ProductSerializer(
             products_on_order, many=True, context={'request': request})
-        return Response(serializer.data)
+        amended_data = list(serializer.data)
+        for product in amended_data:
+            product["order_id"] = open_order.id
+        return Response(amended_data)
